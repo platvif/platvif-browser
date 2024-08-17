@@ -1,27 +1,69 @@
-import { Box, InputAdornment, TextField } from '@mui/material';
+import { Box, Button, InputAdornment, TextField } from '@mui/material';
 import styles from './index.module.scss';
-import { useState } from "react";
+import React, { useState } from "react";
 import { AccountCircle } from '@mui/icons-material';
 import Image from 'next/image';
 import LoginLogo from '@/assets/platvif.png';
+import { login } from '@/services/authService';
+
 
 
 export default function Loginbox() {
     const [isLogin, setIsLogin] = useState(true);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    const toggleForm = () => {
+        setIsLogin(!isLogin);
+    };
+
+    const handleLogin = async(e: React.FormEvent) => {
+        e.preventDefault();
+
+        try {
+            const data = await login(username, password);
+            console.log('Respuesta del servidor', data);
+        } catch(error) {
+            console.error('Error al iniciar sesion: ', error);
+        }
+    }
+    
     return (
         <>
         <div className={styles.container}>
             <div className={styles.login_box}>
                 {isLogin ? (
-                    <form className={styles.form} action="">
-                        <Image src={LoginLogo} alt='Login' className={styles.logo} />
-                        <div className={styles.inputs}>
-                            <input type="text" aria-label='User' placeholder='User' className={styles.input}/>
-                            <input type="password" aria-label='Password' placeholder='Password' className={styles.input}/>
-                        </div>
-                    </form>
+                    <>
+                        <form onSubmit={handleLogin} className={styles.form} action="">
+                            <Image src={LoginLogo} alt='Login' className={styles.logo} />
+                            <div className={styles.inputs}>
+                                <TextField className={styles.input} size='small' type='text' value={username} required onChange={(e) => setUsername(e.target.value)} id="outlined-basic" label="User" variant="outlined" />
+                                <TextField className={styles.input} size='small' type='password' value={password} required onChange={(e) => setPassword(e.target.value)}  id="outlined-basic" label="Password" variant="outlined" />
+                            </div>
+                            <div className={styles.login_container}>
+                                <Button className={styles.btn_login} variant="contained" type="submit">Login</Button>
+                            </div>
+                            <div className={styles.register_container}>
+                                <Button className={styles.btn_register} variant="text" onClick={toggleForm}>Register</Button>
+                            </div>
+                        </form>
+                    </>
                 ) : (
-                    <div></div>
+                    <>
+                        <form className={styles.form} action="">
+                            <Image src={LoginLogo} alt='Login' className={styles.logo} />
+                            <div className={styles.inputs}>
+                                <TextField className={styles.input} size='small' type='text' id="outlined-basic" label="User" variant="outlined" />
+                                <TextField className={styles.input} size='small' type='password' id="outlined-basic" label="Password" variant="outlined" />
+                            </div>
+                            <div className={styles.login_container}>
+                                <Button className={styles.btn_login} variant="contained">Register</Button>
+                            </div>
+                            <div className={styles.register_container}>
+                                <Button className={styles.btn_register} variant="text" onClick={toggleForm}>Login</Button>
+                            </div>
+                        </form>
+                    </>
                 )} 
             </div>
         </div>

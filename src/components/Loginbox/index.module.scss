@@ -10,9 +10,9 @@
         position: relative;
         background: var(--primary-color);
         width: 30%;
-        height: 50%;
+        height: 55%;
         border-radius: 15px;
-        box-shadow: 0px 5px 10px dimgrey;
+        border: 1px solid lightgray;
 
         .form {
             position: absolute;
@@ -22,6 +22,7 @@
             flex-direction: column;
             flex-wrap: nowrap;
             align-items: center;
+            justify-content: center;
 
             .inputs {
                 position: relative;
@@ -33,32 +34,50 @@
                 width: 90%;
                 // background: red;
                 height: 40%;
-                margin-top: 8%;
+                margin-top: 5%;
 
-                input {
-                    width: 90%;
-                    border: 2.5px solid var(--secondary-color);
-                    height: 30%;
-                    border-radius: 17px;
-                    color: var(--secondary-color);
-                    font-weight: 500;
-                    font-family: system-ui;
-                    background: none;
-                    margin: 5%;
-                    box-shadow: 0px 3px 5px #b1b1b1;
+                .input {
+                    position: relative;
+                    width: 100%;
+                    margin-bottom: 5%;
                 }
             }
 
 
             .logo {
-                color: transparent;
                 position: relative;
                 width: 100px;
                 height: 100px;
                 margin-top: 5%;
-                border: 2.7px solid var(--background);
+                border: 2px solid lightgray;
                 border-radius: 15px;
                 box-shadow: 0px 3px 5px dimgray;
+            }
+
+            .login_container {
+                position: relative;
+                width: 80%;
+                height: 15%;
+
+                button {
+                    width: 100%;
+                    background: var(--secondary-color);
+                    // height: 100%;
+                    border-radius: 10px;
+                }
+            }
+
+            .register_container {
+                position: relative;
+                width: 80%;
+                height: 15%;
+
+                button {
+                    width: 100%;
+                    color: var(--secondary-color);
+                    // height: 100%;
+                    border-radius: 10px;
+                }
             }
         }
     }
