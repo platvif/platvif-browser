@@ -6,9 +6,12 @@ import Image from 'next/image';
 import LoginLogo from '@/assets/platvif.png';
 import { login } from '@/services/authService';
 
+interface LoginboxProps {
+    onLogin: () => void;
+}
 
 
-export default function Loginbox() {
+export default function LoginBox({onLogin}: LoginboxProps) {
     const [isLogin, setIsLogin] = useState(true);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -23,6 +26,11 @@ export default function Loginbox() {
         try {
             const data = await login(username, password);
             console.log('Respuesta del servidor', data);
+
+            if(data.mail == username) {
+                console.log('Usuario Autenticado, loguenadose...');
+                onLogin();
+            }
         } catch(error) {
             console.error('Error al iniciar sesion: ', error);
         }
