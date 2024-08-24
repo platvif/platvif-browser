@@ -17,7 +17,14 @@ import Settings from '@mui/icons-material/Settings';
 import People from '@mui/icons-material/People';
 import PermMedia from '@mui/icons-material/PermMedia';
 import Dns from '@mui/icons-material/Dns';
-import Public from '@mui/icons-material/Public';
+// -- o -- //
+import TableRestaurantIcon from '@mui/icons-material/TableRestaurant';
+import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import GroupsIcon from '@mui/icons-material/Groups';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import LogoutIcon from '@mui/icons-material/Logout';
+import RoomPreferencesIcon from '@mui/icons-material/RoomPreferences';
 
 interface MyNavbarProps {
     onSelect: (selectedComponent:string) => void;
@@ -25,12 +32,24 @@ interface MyNavbarProps {
 
 export default function HomeNavbar({onSelect}: MyNavbarProps) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [openReserves, setOpenReserves] = useState(true);
+    const [openReviews, setOpenReviews] = useState(true);
+    const [openSettings, setOpenSettings] = useState(true);
 
-    const data = [
-        { icon: <People />, label: 'Authentication' },
-        { icon: <Dns />, label: 'Database' },
-        { icon: <PermMedia />, label: 'Storage' },
-        { icon: <Public />, label: 'Hosting' },
+    const reserves = [
+        { icon: <TableRestaurantIcon />, label: 'Make a Reserve!' },
+        { icon: <RestaurantMenuIcon />, label: 'My Reserves' },
+        { icon: <FavoriteIcon />, label: 'My Favorite Restaurants' },
+      ];
+
+      const reviews = [
+        { icon: <GroupsIcon />, label: 'Reddit' },
+      ];
+
+      const settings = [
+        { icon: <HelpOutlineIcon />, label: 'About Us' },
+        { icon: <LogoutIcon />, label: 'Log out' },
+        { icon: <RoomPreferencesIcon />, label: 'Preferences' },
       ];
       
 
@@ -51,8 +70,7 @@ export default function HomeNavbar({onSelect}: MyNavbarProps) {
           fontSize: 20,
         },
       });
-
-    const [open, setOpen] = useState(true);
+    
   return (
     <Box sx={{ display: 'flex' }}>
       <ThemeProvider
@@ -74,10 +92,10 @@ export default function HomeNavbar({onSelect}: MyNavbarProps) {
         <Paper elevation={0} sx={{ maxWidth: 256 }}>
           <FireNav component="nav" disablePadding>
             <ListItemButton component="a" href="#customized-list">
-              <ListItemIcon sx={{ fontSize: 20 }}>🔥</ListItemIcon>
+              <ListItemIcon sx={{ fontSize: 20 }}>🍽️</ListItemIcon>
               <ListItemText
                 sx={{ my: 0 }}
-                primary="Firebash"
+                primary="Platvif"
                 primaryTypographyProps={{
                   fontSize: 20,
                   fontWeight: 'medium',
@@ -93,7 +111,7 @@ export default function HomeNavbar({onSelect}: MyNavbarProps) {
                   <Home color="primary" />
                 </ListItemIcon>
                 <ListItemText
-                  primary="Project Overview"
+                  primary="Marcos Bottino"
                   primaryTypographyProps={{
                     color: 'white',
                     fontWeight: 'medium',
@@ -102,7 +120,7 @@ export default function HomeNavbar({onSelect}: MyNavbarProps) {
                   }}
                 />
               </ListItemButton>
-              <Tooltip title="Project Settings">
+              <Tooltip title="User Settings">
                 <IconButton
                   size="large"
                   sx={{
@@ -138,24 +156,25 @@ export default function HomeNavbar({onSelect}: MyNavbarProps) {
               </Tooltip>
             </ListItem>
             <Divider />
+            {/* Box Reserves */}
             <Box
               sx={{
-                bgcolor: open ? 'rgba(71, 98, 130, 0.2)' : null,
-                pb: open ? 2 : 0,
+                bgcolor: openReserves ? 'rgba(71, 98, 130, 0.2)' : null,
+                pb: openReserves ? 2 : 0,
               }}
             >
               <ListItemButton
                 alignItems="flex-start"
-                onClick={() => setOpen(!open)}
+                onClick={() => setOpenReserves(!openReserves)}
                 sx={{
                   px: 3,
                   pt: 2.5,
-                  pb: open ? 0 : 2.5,
-                  '&:hover, &:focus': { '& svg': { opacity: open ? 1 : 0 } },
+                  pb: openReserves ? 0 : 2.5,
+                  '&:hover, &:focus': { '& svg': { opacity: openReserves ? 1 : 0 } },
                 }}
               >
                 <ListItemText
-                  primary="Build"
+                  primary="Reserves"
                   primaryTypographyProps={{
                     fontSize: 15,
                     fontWeight: 'medium',
@@ -163,12 +182,12 @@ export default function HomeNavbar({onSelect}: MyNavbarProps) {
                     mb: '2px',
                     fontFamily: 'system-ui'
                   }}
-                  secondary="Authentication, Firestore Database, Realtime Database, Storage, Hosting, Functions, and Machine Learning"
+                  secondary="Make a Reserve!, My Reserves & My Favorite Restaurants"
                   secondaryTypographyProps={{
                     noWrap: true,
                     fontSize: 12,
                     lineHeight: '16px',
-                    color: open ? 'rgba(0,0,0,0)' : 'rgba(255,255,255,0.5)',
+                    color: openReserves ? 'rgba(0,0,0,0)' : 'rgba(255,255,255,0.5)',
                     fontFamily: 'system-ui'
                   }}
                   sx={{ my: 0 }}
@@ -177,13 +196,135 @@ export default function HomeNavbar({onSelect}: MyNavbarProps) {
                   sx={{
                     mr: -1,
                     opacity: 0,
-                    transform: open ? 'rotate(-180deg)' : 'rotate(0)',
+                    transform: openReserves ? 'rotate(-180deg)' : 'rotate(0)',
                     transition: '0.2s',
                   }}
                 />
               </ListItemButton>
-              {open &&
-                data.map((item) => (
+              {openReserves &&
+                reserves.map((item) => (
+                  <ListItemButton
+                    key={item.label}
+                    sx={{ py: 0, minHeight: 32, color: 'rgba(255,255,255,.8)' }}
+                  >
+                    <ListItemIcon sx={{ color: 'inherit' }}>
+                      {item.icon}
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={item.label}
+                      primaryTypographyProps={{ fontSize: 14, fontWeight: 'medium', fontFamily: 'system-ui' }}
+                    />
+                  </ListItemButton>
+                ))}
+            </Box>
+            {/* Box Reviews */}
+            <Box
+              sx={{
+                bgcolor: openReviews ? 'rgba(71, 98, 130, 0.2)' : null,
+                pb: openReviews ? 2 : 0,
+              }}
+            >
+              <ListItemButton
+                alignItems="flex-start"
+                onClick={() => setOpenReviews(!openReviews)}
+                sx={{
+                  px: 3,
+                  pt: 2.5,
+                  pb: openReviews ? 0 : 2.5,
+                  '&:hover, &:focus': { '& svg': { opacity: openReviews ? 1 : 0 } },
+                }}
+              >
+                <ListItemText
+                  primary="Reviews"
+                  primaryTypographyProps={{
+                    fontSize: 15,
+                    fontWeight: 'medium',
+                    lineHeight: '20px',
+                    mb: '2px',
+                    fontFamily: 'system-ui'
+                  }}
+                  secondary="Reddit"
+                  secondaryTypographyProps={{
+                    noWrap: true,
+                    fontSize: 12,
+                    lineHeight: '16px',
+                    color: openReviews ? 'rgba(0,0,0,0)' : 'rgba(255,255,255,0.5)',
+                    fontFamily: 'system-ui'
+                  }}
+                  sx={{ my: 0 }}
+                />
+                <KeyboardArrowDown
+                  sx={{
+                    mr: -1,
+                    opacity: 0,
+                    transform: openReviews ? 'rotate(-180deg)' : 'rotate(0)',
+                    transition: '0.2s',
+                  }}
+                />
+              </ListItemButton>
+              {openReviews &&
+                reviews.map((item) => (
+                  <ListItemButton
+                    key={item.label}
+                    sx={{ py: 0, minHeight: 32, color: 'rgba(255,255,255,.8)' }}
+                  >
+                    <ListItemIcon sx={{ color: 'inherit' }}>
+                      {item.icon}
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={item.label}
+                      primaryTypographyProps={{ fontSize: 14, fontWeight: 'medium', fontFamily: 'system-ui' }}
+                    />
+                  </ListItemButton>
+                ))}
+            </Box>
+            {/* Box Settings */}
+            <Box
+              sx={{
+                bgcolor: openSettings ? 'rgba(71, 98, 130, 0.2)' : null,
+                pb: openSettings ? 2 : 0,
+              }}
+            >
+              <ListItemButton
+                alignItems="flex-start"
+                onClick={() => setOpenSettings(!openSettings)}
+                sx={{
+                  px: 3,
+                  pt: 2.5,
+                  pb: openSettings ? 0 : 2.5,
+                  '&:hover, &:focus': { '& svg': { opacity: openSettings ? 1 : 0 } },
+                }}
+              >
+                <ListItemText
+                  primary="Settings"
+                  primaryTypographyProps={{
+                    fontSize: 15,
+                    fontWeight: 'medium',
+                    lineHeight: '20px',
+                    mb: '2px',
+                    fontFamily: 'system-ui'
+                  }}
+                  secondary="About Us, Logout & Preferences"
+                  secondaryTypographyProps={{
+                    noWrap: true,
+                    fontSize: 12,
+                    lineHeight: '16px',
+                    color: openSettings ? 'rgba(0,0,0,0)' : 'rgba(255,255,255,0.5)',
+                    fontFamily: 'system-ui'
+                  }}
+                  sx={{ my: 0 }}
+                />
+                <KeyboardArrowDown
+                  sx={{
+                    mr: -1,
+                    opacity: 0,
+                    transform: openSettings ? 'rotate(-180deg)' : 'rotate(0)',
+                    transition: '0.2s',
+                  }}
+                />
+              </ListItemButton>
+              {openSettings &&
+                settings.map((item) => (
                   <ListItemButton
                     key={item.label}
                     sx={{ py: 0, minHeight: 32, color: 'rgba(255,255,255,.8)' }}
