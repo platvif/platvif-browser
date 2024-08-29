@@ -1,6 +1,13 @@
 import HomeNavbar from "@/components/Navbar/Navbar"
 import { useState } from "react"
 import styles from './index.module.scss';
+import ReserveMaker from "../ReserveMaker/ReserveMaker";
+import MyReserves from "../MyReserves/MyReserves";
+import Favorites from "../Favorites/Favorites";
+import Reviews from "../Reviews/Reviews";
+import AboutUs from "../AboutUs/AboutUs";
+import Preferences from "../Preferences/Preferences";
+
 
 export default function HomePage() {
 
@@ -8,33 +15,23 @@ export default function HomePage() {
 
     const renderComponent = () => {
         switch (selectedComponent) {
-            case "Profile":
-              return <div>Perfil del usuario</div>;
-            case "Dashboard":
-              return <div>Dashboard</div>;
-            case "Activity":
-              return <div>Actividad</div>;
-            case "Analytics":
-              return <div>Análisis</div>;
-            case "System":
-              return <div>Sistema</div>;
-            case "Deployments":
-              return <div>Despliegues</div>;
-            case "MySettings":
-              return <div>Mis Configuraciones</div>;
-            case "TeamSettings":
-              return <div>Configuraciones del Equipo</div>;
-            case "Help":
-              return <div>Ayuda y Feedback</div>;
+            case "Reserve":
+              return <ReserveMaker />;
+            case "MyReserves":
+              return <MyReserves/>;
+            case "Favorites":
+              return <Favorites/>;
+            case "Reviews":
+              return <Reviews/>;
+            case "AboutUs":
+              return <AboutUs/>;
             case "Logout":
-              // Lógica de cierre de sesión
-              return <div>Has cerrado sesión</div>;
-            case "Login":
-              return <div>Login</div>;
-            case "SignUp":
-              return <div>Registro</div>;
+              // Logica para el logout.
+              return <div>Logout</div>;
+            case "Preferences":
+              return <Preferences/>;
             default:
-              return <div>Dashboard</div>;
+              return <ReserveMaker />
         }
     };
 
@@ -42,7 +39,7 @@ export default function HomePage() {
         <>
             <div className={styles.container}>
                 <HomeNavbar onSelect={setSelectedComponent}/>
-                <div style={{padding: '20px'}}>
+                <div className={styles.component_container}>
                     {renderComponent()}
                 </div>
             </div>

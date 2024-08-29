@@ -1,0 +1,47 @@
+.container {
+    padding: 20px;
+    position: relative;
+    background: red;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .title_container {
+        position: relative;
+        background: yellow;
+        width: 100%;
+        height: 12%;
+        color: var(--secondary-color);
+
+        h2 {
+            position: relative;
+            font-weight: 500;
+            margin: 1% 0% 1% 0%;
+        }
+    }
+
+    .search_container {
+        position: relative;
+        width: 100%;
+        height: 10%;
+        background: blue;
+        top: 3%;
+    }
+
+    .suggestions_container {
+        position: relative;
+        width: 100%;
+        height: 20%;
+        background: purple;
+        top: 5%;
+    }
+
+    .restaurant_list {
+        position: relative;
+        width: 100%;
+        height: 10%;
+        background: azure;
+        top: 10%;
+        height: 100%;
+    }
+}
