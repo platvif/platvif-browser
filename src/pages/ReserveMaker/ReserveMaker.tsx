@@ -1,6 +1,7 @@
 import Search from '@/components/Search/Search';
 import styles from './index.module.scss';
 import Suggestions from '@/components/Suggestions/Suggestions';
+import RestaurantList from '@/components/RestaurantList/RestaurantList';
 
 export default function ReserveMaker() {
     return (
@@ -17,7 +18,7 @@ export default function ReserveMaker() {
                     <Suggestions/>
                 </div>
                 <div className={styles.restaurant_list}>
-                    
+                    <RestaurantList/>
                 </div>
             </div>
         </>

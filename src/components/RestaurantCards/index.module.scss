@@ -1,0 +1,15 @@
+// mask-image: linear-gradient(black 85%, transparent);
+
+.restaurantContainerCard {
+    position: relative;
+    width: 1000px;
+    height: 302px;
+    margin: 1%;
+    border-radius: 25px;
+
+
+
+    .btn:hover {
+        background-color: var(--secondary-color) !important;
+    }
+}

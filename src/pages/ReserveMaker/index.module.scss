@@ -1,7 +1,7 @@
 .container {
     padding: 20px;
     position: relative;
-    background: red;
+    // background: red;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -24,7 +24,7 @@
         position: relative;
         width: 100%;
         height: 10%;
-        background: blue;
+        // background: blue;
         top: 3%;
     }
 
@@ -43,5 +43,10 @@
         background: azure;
         top: 10%;
         height: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: space-between;
+        justify-content: space-evenly;
     }
 }

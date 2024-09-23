@@ -1,9 +1,39 @@
+import { InputAdornment, TextField } from "@mui/material"
+import styles from './index.module.scss';
+import SearchIcon from '@mui/icons-material/Search'; 
+import { useState } from "react";
+
 export default function Search() {
-    return(
+    const [showContainer, setShowContainer] = useState(false);
+
+    const handleClick = () => {
+        setShowContainer(!showContainer);
+    }
+
+    return (
         <>
-            <div>
-                Search works!
-            </div>
+            <TextField 
+                className={styles.input} 
+                size='medium' 
+                type='text' 
+                required 
+                id="outlined-basic" 
+                label="Search" 
+                variant="outlined"
+                color="primary"
+                onClick={handleClick}
+                InputProps={{
+                    startAdornment: (
+                        <InputAdornment position="start">
+                            <SearchIcon color="primary"/>
+                        </InputAdornment>
+                    )
+                }}
+                />
+
+            {/* {showContainer && (
+                
+            )} */}
         </>
     )
 }
